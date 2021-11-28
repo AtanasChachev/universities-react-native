@@ -1,0 +1,1 @@
+export const UPDATE_UNIVERSITIES: Symbol = Symbol('UPDATE_UNIVERSITIES');
