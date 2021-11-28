@@ -15,6 +15,7 @@ export type Settings = {
     };
   };
   countries: Country[];
+  universityImages: ImageSourcePropType[];
 };
 
 export type Country = {

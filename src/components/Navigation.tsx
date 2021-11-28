@@ -1,10 +1,30 @@
 import React, { useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Settings } from '@src/pages';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Home, Universities, Settings } from '@src/pages';
 import { ThemeColors } from '@src/styles/colors';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+const Stack = createStackNavigator();
+
+const HomeScreensStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ title: 'Home' }}
+        name="HomeScreen"
+        component={Home}
+      />
+      <Stack.Screen
+        options={{ title: 'Universities' }}
+        name="UniversitiesScreen"
+        component={Universities}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -42,8 +62,9 @@ const Navigation = () => {
             renderTabBarIcon(route.name, focused, color),
           tabBarActiveTintColor: ThemeColors.persimmon,
           tabBarInactiveTintColor: ThemeColors.dustyGray,
+          headerShown: false,
         })}>
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Home" component={HomeScreensStack} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>

@@ -8,9 +8,23 @@ import { universitiesService } from '@src/services/universities';
 import { useDispatch } from 'react-redux';
 import { updateUniversities } from '@src/store/actions/universities';
 import { shShowLoader } from '@src/store/actions/app';
+import { University } from '@src/models/store/universities';
 
 const Home = ({ navigation }: any) => {
   const dispatch = useDispatch();
+
+  const addUniversityImageAndStat = useCallback(
+    (universities: University[]) => {
+      universities.map((university: University) => {
+        university.image =
+          SETTINGS.universityImages[
+            Math.round(Math.random() * SETTINGS.universityImages.length)
+          ];
+        university.likes = Math.round(Math.random() * 100) + 1;
+      });
+    },
+    [],
+  );
 
   const fetchUniversitiesByCountry = useCallback(
     async (country: string) => {
@@ -22,15 +36,18 @@ const Home = ({ navigation }: any) => {
         );
 
         if (data.length) {
+          addUniversityImageAndStat(data);
           dispatch(updateUniversities(data));
+          navigation.navigate('UniversitiesScreen');
         }
 
         dispatch(shShowLoader(false));
       } catch (e) {
+        console.log(e);
         dispatch(shShowLoader(false));
       }
     },
-    [dispatch],
+    [addUniversityImageAndStat, dispatch, navigation],
   );
 
   return (
