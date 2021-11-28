@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { Navigation } from '@src/components/index';
+import { Navigation } from '@src/components';
 
 const Startup = () => {
   return (
