@@ -1,3 +1,3 @@
 export type AppState = {
-  testProp: string;
+  showLoader: boolean;
 };

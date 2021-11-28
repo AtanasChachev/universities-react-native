@@ -6,23 +6,29 @@ import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
 import { universitiesService } from '@src/services/universities';
 import { useDispatch } from 'react-redux';
-import { updateStoreProp } from '@src/store/actions/universities';
+import { updateUniversities } from '@src/store/actions/universities';
+import { shShowLoader } from '@src/store/actions/app';
 
 const Home = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const fetchUniversitiesByCountry = useCallback(
     async (country: string) => {
+      dispatch(shShowLoader(true));
+
       try {
         const { data } = await universitiesService.fetchUniversitiesByCountry(
           country,
         );
 
         if (data.length) {
-          console.log(data);
-          dispatch(updateStoreProp(data));
+          dispatch(updateUniversities(data));
         }
-      } catch (e) {}
+
+        dispatch(shShowLoader(false));
+      } catch (e) {
+        dispatch(shShowLoader(false));
+      }
     },
     [dispatch],
   );

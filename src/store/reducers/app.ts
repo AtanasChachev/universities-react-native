@@ -1,14 +1,14 @@
-import { UPDATE_PROP } from '@src/store/constants/app';
+import { UPDATE_LOADER } from '@src/store/constants/app';
 import { AppState } from '@src/models/store/app';
 
 const appState: AppState = {
-  testProp: '',
+  showLoader: false,
 };
 
 const AppReducer = (state: AppState = appState, action: any) => {
   switch (action.type) {
-    case UPDATE_PROP: {
-      return { ...state, testProp: action.payload };
+    case UPDATE_LOADER: {
+      return { ...state, showLoader: action.payload };
     }
 
     default: {

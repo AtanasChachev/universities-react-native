@@ -1,1 +1,1 @@
-export const UPDATE_PROP: Symbol = Symbol('UPDATE_PROP');
+export const UPDATE_LOADER: Symbol = Symbol('UPDATE_LOADER');

@@ -1,7 +1,7 @@
-import { UPDATE_PROP } from '@src/store/constants/app';
+import { UPDATE_LOADER } from '@src/store/constants/app';
 
 /* Updating prop in the store. */
-export const updateStoreProp = (testProp: string) => ({
-  type: UPDATE_PROP,
-  payload: testProp,
+export const shShowLoader = (showLoader: boolean) => ({
+  type: UPDATE_LOADER,
+  payload: showLoader,
 });
