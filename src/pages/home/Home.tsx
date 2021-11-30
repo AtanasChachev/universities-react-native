@@ -18,7 +18,7 @@ const Home = ({ navigation }: any) => {
       universities.map((university: University) => {
         university.image =
           SETTINGS.universityImages[
-            Math.round(Math.random() * SETTINGS.universityImages.length)
+            Math.floor(Math.random() * SETTINGS.universityImages.length)
           ];
         university.likes = Math.round(Math.random() * 100) + 1;
       });
@@ -55,6 +55,7 @@ const Home = ({ navigation }: any) => {
       <View style={styles.buttonHolder}>
         {SETTINGS.countries.map((country: Country, index: number) => (
           <AnimatedHolder
+            shAnimateOnInit={true}
             key={index}
             outputRangeFirst={20}
             duration={500}

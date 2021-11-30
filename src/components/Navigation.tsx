@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home, Universities, Settings } from '@src/pages';
+import { Home, Universities, Settings, UniversitiesDetailed } from '@src/pages';
 import { ThemeColors } from '@src/styles/colors';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -17,10 +17,17 @@ const HomeScreensStack = () => {
         name="HomeScreen"
         component={Home}
       />
+
       <Stack.Screen
-        options={{ title: 'Universities' }}
+        options={{ title: 'Universities', headerBackTitle: '' }}
         name="UniversitiesScreen"
         component={Universities}
+      />
+
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="UniversitiesDetailed"
+        component={UniversitiesDetailed}
       />
     </Stack.Navigator>
   );

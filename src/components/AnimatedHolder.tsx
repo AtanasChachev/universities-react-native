@@ -9,6 +9,16 @@ type AnimatedHolderProps = {
   styles?: any;
   children: ReactNode | ReactNode[];
   translateHorizontal?: boolean;
+  shAnimateOnInit?: boolean;
+  animatePropState?: any;
+  pointerEvents?:
+    | Animated.Value
+    | Animated.AnimatedInterpolation
+    | 'box-none'
+    | 'none'
+    | 'box-only'
+    | 'auto'
+    | undefined;
 };
 
 const AnimatedHolder = ({
@@ -19,6 +29,9 @@ const AnimatedHolder = ({
   styles,
   children,
   translateHorizontal,
+  shAnimateOnInit,
+  animatePropState,
+  pointerEvents,
 }: AnimatedHolderProps) => {
   const translate = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -42,12 +55,24 @@ const AnimatedHolder = ({
   );
 
   useEffect(() => {
-    startSlideAnimation(1, translate);
-    startSlideAnimation(1, opacity);
-  }, [opacity, startSlideAnimation, translate]);
+    if (shAnimateOnInit) {
+      startSlideAnimation(1, translate);
+      startSlideAnimation(1, opacity);
+    } else {
+      startSlideAnimation(animatePropState, translate);
+      startSlideAnimation(animatePropState, opacity);
+    }
+  }, [
+    opacity,
+    translate,
+    animatePropState,
+    shAnimateOnInit,
+    startSlideAnimation,
+  ]);
 
   return (
     <Animated.View
+      pointerEvents={pointerEvents ?? 'auto'}
       style={{
         ...styles,
         opacity: opacity,

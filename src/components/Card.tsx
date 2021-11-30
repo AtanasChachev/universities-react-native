@@ -34,7 +34,7 @@ const Card = ({ title, image, numberOfLikes, onPress }: CardType) => {
             {numberOfLikes && (
               <View style={styles.stats}>
                 <Icon color={ThemeColors.persimmon} name="heart" size={30} />
-                <Text>{numberOfLikes}</Text>
+                <Text style={styles.likes}>{numberOfLikes}</Text>
               </View>
             )}
 
@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  likes: {
+    paddingLeft: 4,
   },
 });
 

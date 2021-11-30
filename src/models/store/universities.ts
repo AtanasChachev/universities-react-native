@@ -1,6 +1,7 @@
 import { ImageSourcePropType } from 'react-native';
 
 export type UniversitiesState = {
+  current: University | null;
   universities: University[];
 };
 

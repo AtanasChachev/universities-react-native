@@ -1,10 +1,11 @@
 import React from 'react';
 import { SafeAreaView, VirtualizedList, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
 import { University } from '@src/models/store/universities';
 import { AnimatedHolder, Card } from '@src/components';
 import { ThemeColors } from '@src/styles/colors';
+import { updateCurrentUniversity } from '@src/store/actions/universities';
 
 type VirtualizedItem = {
   index: number;
@@ -15,12 +16,17 @@ type KeyExtractorType = {
   university: University;
 };
 
-const Universities = () => {
+const Universities = ({ navigation }: any) => {
+  const dispatch = useDispatch();
   const { universities } = useSelector((store: Store) => store.universities);
 
   return (
     <SafeAreaView style={styles.holder}>
-      <AnimatedHolder outputRangeFirst={40} delay={400} duration={400}>
+      <AnimatedHolder
+        shAnimateOnInit={true}
+        outputRangeFirst={40}
+        delay={400}
+        duration={400}>
         <VirtualizedList
           data={universities}
           initialNumToRender={2}
@@ -30,7 +36,8 @@ const Universities = () => {
               title={item.university.name}
               image={item.university.image}
               onPress={() => {
-                console.log(item.university);
+                dispatch(updateCurrentUniversity(item.university));
+                navigation.navigate('UniversitiesDetailed');
               }}
             />
           )}
