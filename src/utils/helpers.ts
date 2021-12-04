@@ -1,5 +1,6 @@
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { University } from '@src/models/store/universities';
 
 /*
   Function which shows the toast. Accepts three arguements.
@@ -27,4 +28,17 @@ export const storeData = async (key: string, value: string) => {
 /* Get data in the async storage */
 export const getData = async (key: string) => {
   return await AsyncStorage.getItem(key);
+};
+
+export const checkIfIsLiked = (
+  favoriteUniversities: University[],
+  university: University,
+) => {
+  const activeUniversityIndex = favoriteUniversities.findIndex(
+    (_university: University) => _university.name === university.name,
+  );
+
+  if (activeUniversityIndex > -1) {
+    university.isLiked = true;
+  }
 };

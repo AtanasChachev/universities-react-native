@@ -16,30 +16,45 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Store } from '@src/models/store/store';
 
 const HomeStack = createStackNavigator();
+const FavoritesStack = createStackNavigator();
 
-const HomeScreensStack = () => {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        options={{ title: 'Home' }}
-        name="HomeScreen"
-        component={Home}
-      />
+const HomeScreensStack = () => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen
+      options={{ title: 'Home' }}
+      name="HomeScreen"
+      component={Home}
+    />
 
-      <HomeStack.Screen
-        options={{ title: 'Universities', headerBackTitle: '' }}
-        name="UniversitiesScreen"
-        component={Universities}
-      />
+    <HomeStack.Screen
+      options={{ title: 'Universities', headerBackTitle: '' }}
+      name="UniversitiesScreen"
+      component={Universities}
+    />
 
-      <HomeStack.Screen
-        options={{ headerShown: false }}
-        name="UniversitiesDetailed"
-        component={UniversitiesDetailed}
-      />
-    </HomeStack.Navigator>
-  );
-};
+    <HomeStack.Screen
+      options={{ headerShown: false }}
+      name="UniversitiesDetailed"
+      component={UniversitiesDetailed}
+    />
+  </HomeStack.Navigator>
+);
+
+const FavoritesScreenStack = () => (
+  <FavoritesStack.Navigator>
+    <FavoritesStack.Screen
+      options={{ title: 'Favorites' }}
+      name="FavoriteUniversities"
+      component={FavoriteUniversities}
+    />
+
+    <FavoritesStack.Screen
+      options={{ headerShown: false }}
+      name="UniversitiesDetailed"
+      component={UniversitiesDetailed}
+    />
+  </FavoritesStack.Navigator>
+);
 
 const Tab = createBottomTabNavigator();
 
@@ -85,12 +100,12 @@ const Navigation = () => {
             renderTabBarIcon(route.name, focused, color),
           tabBarActiveTintColor: ThemeColors.persimmon,
           tabBarInactiveTintColor: ThemeColors.dustyGray,
-          headerShown: route.name !== 'Home',
+          headerShown: route.name === 'Settings',
         })}>
         <Tab.Screen name="Home" component={HomeScreensStack} />
         <Tab.Screen
           name="Favorites"
-          component={FavoriteUniversities}
+          component={FavoritesScreenStack}
           options={{ tabBarBadge: favoriteUniversitiesLength }}
         />
         <Tab.Screen name="Settings" component={Settings} />

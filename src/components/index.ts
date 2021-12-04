@@ -8,3 +8,4 @@ export * from './RenderHTML';
 /* Specific components for the Universities pages */
 export * from './Universities/DetailedHero';
 export * from './Universities/DetailedFixedHeader';
+export * from './Universities/VirtualizedCardsList';
