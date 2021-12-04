@@ -17,6 +17,10 @@ export const SETTINGS: Settings = {
         outline: 'home-outline',
         filled: 'home',
       },
+      favorites: {
+        outline: 'heart-outline',
+        filled: 'heart',
+      },
       settings: {
         outline: 'settings-outline',
         filled: 'settings',

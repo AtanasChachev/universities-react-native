@@ -8,6 +8,10 @@ export type Settings = {
         outline: string;
         filled: string;
       };
+      favorites: {
+        outline: string;
+        filled: string;
+      };
       settings: {
         outline: string;
         filled: string;

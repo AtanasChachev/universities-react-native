@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaView, VirtualizedList, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
@@ -18,7 +18,22 @@ type KeyExtractorType = {
 
 const Universities = ({ navigation }: any) => {
   const dispatch = useDispatch();
-  const { universities } = useSelector((store: Store) => store.universities);
+  const { universities, favoriteUniversities } = useSelector(
+    (store: Store) => store.universities,
+  );
+
+  const checkIfIsLiked = useCallback(
+    (university: University) => {
+      const activeUniversityIndex = favoriteUniversities.findIndex(
+        (_university: University) => _university.name === university.name,
+      );
+
+      if (activeUniversityIndex > -1) {
+        university.isLiked = true;
+      }
+    },
+    [favoriteUniversities],
+  );
 
   return (
     <SafeAreaView style={styles.holder}>
@@ -36,6 +51,7 @@ const Universities = ({ navigation }: any) => {
               title={item.university.name}
               image={item.university.image}
               onPress={() => {
+                checkIfIsLiked(item.university);
                 dispatch(updateCurrentUniversity(item.university));
                 navigation.navigate('UniversitiesDetailed');
               }}

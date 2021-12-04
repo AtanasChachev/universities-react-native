@@ -1,41 +1,53 @@
 import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home, Universities, Settings, UniversitiesDetailed } from '@src/pages';
+import {
+  Home,
+  Universities,
+  Settings,
+  UniversitiesDetailed,
+  FavoriteUniversities,
+} from '@src/pages';
 import { ThemeColors } from '@src/styles/colors';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Store } from '@src/models/store/store';
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
 
 const HomeScreensStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <HomeStack.Navigator>
+      <HomeStack.Screen
         options={{ title: 'Home' }}
         name="HomeScreen"
         component={Home}
       />
 
-      <Stack.Screen
+      <HomeStack.Screen
         options={{ title: 'Universities', headerBackTitle: '' }}
         name="UniversitiesScreen"
         component={Universities}
       />
 
-      <Stack.Screen
+      <HomeStack.Screen
         options={{ headerShown: false }}
         name="UniversitiesDetailed"
         component={UniversitiesDetailed}
       />
-    </Stack.Navigator>
+    </HomeStack.Navigator>
   );
 };
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
+  const { favoriteUniversitiesLength } = useSelector(
+    (store: Store) => store.universities,
+  );
+
   const renderTabBarIcon = useCallback(
     (routeName: string, isFocused: boolean, color: string) => {
       let iconName = '';
@@ -48,6 +60,10 @@ const Navigation = () => {
         iconName = isFocused
           ? SETTINGS.tabBar.icons.settings.filled
           : SETTINGS.tabBar.icons.settings.outline;
+      } else {
+        iconName = isFocused
+          ? SETTINGS.tabBar.icons.favorites.filled
+          : SETTINGS.tabBar.icons.favorites.outline;
       }
 
       return (
@@ -69,9 +85,14 @@ const Navigation = () => {
             renderTabBarIcon(route.name, focused, color),
           tabBarActiveTintColor: ThemeColors.persimmon,
           tabBarInactiveTintColor: ThemeColors.dustyGray,
-          headerShown: false,
+          headerShown: route.name !== 'Home',
         })}>
         <Tab.Screen name="Home" component={HomeScreensStack} />
+        <Tab.Screen
+          name="Favorites"
+          component={FavoriteUniversities}
+          options={{ tabBarBadge: favoriteUniversitiesLength }}
+        />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
