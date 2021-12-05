@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import { DetailedHero, DetailedFixedHeader } from '@src/components';
 import { universityMockUpHTMLData } from '@src/config/mockup-data';
 import { RenderHTMLComponent } from '@src/components';
 import { updateFavoriteUniversity } from '@src/store/actions/universities';
-import { ThemeColors } from '@src/styles/colors';
 
 const UniversitiesDetailed = ({ navigation }: any) => {
   const dispatch = useDispatch();
@@ -53,20 +52,10 @@ const UniversitiesDetailed = ({ navigation }: any) => {
           />
         )}
 
-        <View style={styles.contentHolder}>
-          <RenderHTMLComponent html={universityMockUpHTMLData} />
-        </View>
+        <RenderHTMLComponent html={universityMockUpHTMLData} />
       </ScrollView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  contentHolder: {
-    backgroundColor: ThemeColors.colorWhite,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-});
 
 export { UniversitiesDetailed };

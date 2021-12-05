@@ -7,7 +7,6 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from 'react-native';
-import { ThemeColors } from '@src/styles/colors';
 import { showToastMessage } from '@src/utils/helpers';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -42,7 +41,7 @@ const DetailedHero = ({ likes, image, isUniversityLiked, onPress }: Props) => {
         <Icon
           name={isLiked ? 'heart' : 'heart-outline'}
           size={30}
-          color={ThemeColors.colorWhite}
+          color={'#FFF'}
         />
 
         <Text style={styles.stat}>{likesState}</Text>
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   stat: {
-    color: ThemeColors.colorWhite,
+    color: '#FFF',
     fontSize: 16,
     paddingLeft: 8,
   },

@@ -1,6 +1,7 @@
 export type Colors = {
-  colorWhite: string;
-  colorBlack: string;
-  persimmon: string;
-  dustyGray: string;
+  background: string;
+  text: string;
+  iconActive: string;
+  iconInactive: string;
+  componentBackground: string;
 };

@@ -11,7 +11,7 @@ import { getData, showToastMessage } from '@src/utils/helpers';
 const Startup = () => {
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
-  const { showLoader } = useSelector((store: Store) => store.app);
+  const { showLoader, theme } = useSelector((store: Store) => store.app);
 
   const loadFavoriteUniversities = useCallback(async () => {
     try {
@@ -35,7 +35,9 @@ const Startup = () => {
 
   return (
     <>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar
+        barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
+      />
 
       <Navigation />
       <Loader showLoader={showLoader} />

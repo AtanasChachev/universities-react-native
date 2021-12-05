@@ -10,55 +10,74 @@ import {
   UniversitiesDetailed,
   FavoriteUniversities,
 } from '@src/pages';
-import { ThemeColors } from '@src/styles/colors';
+import { useColor } from '@src/styles/colors';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Store } from '@src/models/store/store';
+import { Colors } from '@src/models/colors';
 
 const HomeStack = createStackNavigator();
 const FavoritesStack = createStackNavigator();
 
-const HomeScreensStack = () => (
-  <HomeStack.Navigator>
-    <HomeStack.Screen
-      options={{ title: 'Home' }}
-      name="HomeScreen"
-      component={Home}
-    />
+const getScreenOptions = (theme: Colors) => {
+  return {
+    headerStyle: {
+      backgroundColor: theme.background,
+    },
+    headerTintColor: theme.text,
+  };
+};
 
-    <HomeStack.Screen
-      options={{ title: 'Universities', headerBackTitle: '' }}
-      name="UniversitiesScreen"
-      component={Universities}
-    />
+const HomeScreensStack = () => {
+  const theme = useColor();
 
-    <HomeStack.Screen
-      options={{ headerShown: false }}
-      name="UniversitiesDetailed"
-      component={UniversitiesDetailed}
-    />
-  </HomeStack.Navigator>
-);
+  return (
+    <HomeStack.Navigator screenOptions={getScreenOptions(theme)}>
+      <HomeStack.Screen
+        options={{ title: 'Home' }}
+        name="HomeScreen"
+        component={Home}
+      />
 
-const FavoritesScreenStack = () => (
-  <FavoritesStack.Navigator>
-    <FavoritesStack.Screen
-      options={{ title: 'Favorites' }}
-      name="FavoriteUniversities"
-      component={FavoriteUniversities}
-    />
+      <HomeStack.Screen
+        options={{ title: 'Universities', headerBackTitle: '' }}
+        name="UniversitiesScreen"
+        component={Universities}
+      />
 
-    <FavoritesStack.Screen
-      options={{ headerShown: false }}
-      name="UniversitiesDetailed"
-      component={UniversitiesDetailed}
-    />
-  </FavoritesStack.Navigator>
-);
+      <HomeStack.Screen
+        options={{ headerShown: false }}
+        name="UniversitiesDetailed"
+        component={UniversitiesDetailed}
+      />
+    </HomeStack.Navigator>
+  );
+};
+
+const FavoritesScreenStack = () => {
+  const theme = useColor();
+
+  return (
+    <FavoritesStack.Navigator screenOptions={getScreenOptions(theme)}>
+      <FavoritesStack.Screen
+        options={{ title: 'Favorites' }}
+        name="FavoriteUniversities"
+        component={FavoriteUniversities}
+      />
+
+      <FavoritesStack.Screen
+        options={{ headerShown: false }}
+        name="UniversitiesDetailed"
+        component={UniversitiesDetailed}
+      />
+    </FavoritesStack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
+  const theme = useColor();
   const { favoriteUniversitiesLength } = useSelector(
     (store: Store) => store.universities,
   );
@@ -98,9 +117,12 @@ const Navigation = () => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color }) =>
             renderTabBarIcon(route.name, focused, color),
-          tabBarActiveTintColor: ThemeColors.persimmon,
-          tabBarInactiveTintColor: ThemeColors.dustyGray,
-          headerShown: route.name === 'Settings',
+          tabBarActiveTintColor: theme.iconActive,
+          tabBarInactiveTintColor: theme.iconInactive,
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: theme.background,
+          },
         })}>
         <Tab.Screen name="Home" component={HomeScreensStack} />
         <Tab.Screen

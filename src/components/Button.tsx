@@ -6,8 +6,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from 'react-native';
-import { ThemeColors } from '@src/styles/colors';
-
+import { useColor } from '@src/styles/colors';
 type ButtonType = {
   text: string;
   icon?: ImageSourcePropType;
@@ -15,11 +14,19 @@ type ButtonType = {
 };
 
 const Button = ({ text, icon, onPress }: ButtonType) => {
+  const theme = useColor();
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        ...styles.button,
+        backgroundColor: theme.componentBackground,
+        shadowColor: theme.text,
+      }}>
       {icon && <Image style={styles.icon} source={icon} />}
 
-      <Text style={styles.text}>{text}</Text>
+      <Text style={{ ...styles.text, color: theme.text }}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -31,8 +38,6 @@ const styles = StyleSheet.create({
     padding: 14,
     marginBottom: 20,
     borderRadius: 8,
-    backgroundColor: ThemeColors.colorWhite,
-    shadowColor: ThemeColors.colorBlack,
     shadowOffset: {
       width: 0,
       height: 2,

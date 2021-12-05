@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ThemeColors } from '@src/styles/colors';
+import { useColor } from '@src/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 type CardType = {
@@ -18,9 +18,17 @@ type CardType = {
 };
 
 const Card = ({ title, image, numberOfLikes, onPress }: CardType) => {
+  const theme = useColor();
+
   return (
     <View style={styles.holder}>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TouchableOpacity
+        style={{
+          ...styles.button,
+          backgroundColor: theme.componentBackground,
+          shadowColor: theme.text,
+        }}
+        onPress={onPress}>
         {image && (
           <View style={styles.imageHolder}>
             <ImageBackground source={image} style={styles.backgroundImage} />
@@ -28,17 +36,21 @@ const Card = ({ title, image, numberOfLikes, onPress }: CardType) => {
         )}
 
         <View style={styles.contentHolder}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={{ ...styles.title, color: theme.text }}>{title}</Text>
 
           <View style={styles.statsHolder}>
             {numberOfLikes && (
               <View style={styles.stats}>
-                <Icon color={ThemeColors.persimmon} name="heart" size={30} />
-                <Text style={styles.likes}>{numberOfLikes}</Text>
+                <Icon color={theme.iconActive} name="heart" size={30} />
+                <Text style={{ ...styles.likes, color: theme.text }}>
+                  {numberOfLikes}
+                </Text>
               </View>
             )}
 
-            <Text style={styles.anchor}>View more</Text>
+            <Text style={{ ...styles.anchor, color: theme.iconActive }}>
+              View more
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -60,8 +72,6 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    backgroundColor: ThemeColors.colorWhite,
-    shadowColor: ThemeColors.colorBlack,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -80,7 +90,6 @@ const styles = StyleSheet.create({
   },
   anchor: {
     fontSize: 16,
-    color: ThemeColors.persimmon,
   },
   statsHolder: {
     flexDirection: 'row',

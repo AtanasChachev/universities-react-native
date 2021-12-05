@@ -7,7 +7,6 @@ import {
   Text,
 } from 'react-native';
 import { AnimatedHolder } from '@src/components';
-import { ThemeColors } from '@src/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -56,11 +55,7 @@ const DetailedFixedHeader = ({
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => onGoBack()}>
-            <Icon
-              size={26}
-              color={ThemeColors.colorWhite}
-              name="chevron-back"
-            />
+            <Icon size={26} color={'#FFF'} name="chevron-back" />
 
             <Text style={styles.headerText}>Back</Text>
           </TouchableOpacity>
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 16,
     lineHeight: 24,
-    color: ThemeColors.colorWhite,
+    color: '#FFF',
     maxWidth: 240,
   },
   headerContent: {

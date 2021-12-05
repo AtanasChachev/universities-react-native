@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
 import { AnimatedHolder, Button } from '@src/components';
-import { ThemeColors } from '@src/styles/colors';
+import { useColor } from '@src/styles/colors';
 import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
 import { universitiesService } from '@src/services/universities';
@@ -12,6 +12,7 @@ import { University } from '@src/models/store/universities';
 
 const Home = ({ navigation }: any) => {
   const dispatch = useDispatch();
+  const theme = useColor();
 
   const addUniversityImageAndStat = useCallback(
     (universities: University[]) => {
@@ -51,7 +52,8 @@ const Home = ({ navigation }: any) => {
   );
 
   return (
-    <SafeAreaView style={styles.holder}>
+    <SafeAreaView
+      style={{ ...styles.holder, backgroundColor: theme.background }}>
       <View style={styles.buttonHolder}>
         {SETTINGS.countries.map((country: Country, index: number) => (
           <AnimatedHolder
@@ -78,7 +80,6 @@ const Home = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   holder: {
     flex: 1,
-    backgroundColor: ThemeColors.colorWhite,
   },
   buttonHolder: {
     flex: 1,
