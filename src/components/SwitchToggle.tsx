@@ -1,4 +1,4 @@
-import { useColor } from '@src/styles/colors';
+import { useTheme } from '@src/styles/hooks/useTheme';
 import React, { useState } from 'react';
 import { Switch } from 'react-native';
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const SwitchToggle = ({ value, onValueChange }: Props) => {
-  const theme = useColor();
+  const theme = useTheme();
   const [_value, _updateValue] = useState(value);
 
   return (

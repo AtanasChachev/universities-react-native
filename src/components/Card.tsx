@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useColor } from '@src/styles/colors';
+import { useTheme } from '@src/styles/hooks/useTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 type CardType = {
@@ -18,7 +18,7 @@ type CardType = {
 };
 
 const Card = ({ title, image, numberOfLikes, onPress }: CardType) => {
-  const theme = useColor();
+  const theme = useTheme();
 
   return (
     <View style={styles.holder}>

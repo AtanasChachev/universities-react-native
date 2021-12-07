@@ -1,6 +1,8 @@
 import { Colors } from '@src/models/colors';
-import { Store } from '@src/models/store/store';
-import { useSelector } from 'react-redux';
+
+type ThemeProps = {
+  [key: string]: Colors;
+};
 
 /* The colors for the UI. Names can be changed, those are just an example */
 export const ThemeColors: Colors = {
@@ -28,12 +30,7 @@ export const dark: Colors = {
   componentBackground: '#383838',
 };
 
-const colors: any = {
+export const colors: ThemeProps = {
   light: light,
   dark: dark,
-};
-
-export const useColor = () => {
-  const { theme } = useSelector((store: Store) => store.app);
-  return colors[theme];
 };

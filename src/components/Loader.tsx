@@ -6,7 +6,6 @@ import {
   View,
   Text,
 } from 'react-native';
-import { useColor } from '@src/styles/colors';
 import { useEffect } from 'react';
 
 type LoaderType = {
@@ -14,7 +13,6 @@ type LoaderType = {
 };
 
 const Loader = ({ showLoader }: LoaderType) => {
-  const theme = useColor();
   /* Animation properties */
   const loadingRef = useRef(new Animated.Value(showLoader ? 1 : 0)).current;
 
@@ -49,7 +47,6 @@ const Loader = ({ showLoader }: LoaderType) => {
       pointerEvents={showLoader ? 'auto' : 'none'}
       style={{
         ...styles.holder,
-        backgroundColor: theme.componentBackground,
         opacity: loadingInterpolationFade,
         transform: [
           {
@@ -58,7 +55,7 @@ const Loader = ({ showLoader }: LoaderType) => {
         ],
       }}>
       <View style={styles.loaderHolder}>
-        <Text style={{ ...styles.text, color: theme.text }}>Loading...</Text>
+        <Text style={styles.text}>Loading...</Text>
         <ActivityIndicator size="large" />
       </View>
     </Animated.View>
@@ -85,6 +82,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     marginBottom: 20,
+    color: '#FFF',
   },
 });
 

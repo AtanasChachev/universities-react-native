@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { updateFavoriteUniversities } from '@src/store/actions/universities';
-import Toast from 'react-native-toast-message';
 import { getData, showToastMessage } from '@src/utils/helpers';
+import { updateTheme } from './store/actions/app';
+import Toast from 'react-native-toast-message';
 
 const Startup = () => {
   const dispatch = useDispatch();
@@ -29,9 +30,20 @@ const Startup = () => {
     }
   }, [dispatch]);
 
+  const loadUITheme = useCallback(async () => {
+    try {
+      const uiTheme = await getData('theme');
+
+      if (uiTheme) {
+        dispatch(updateTheme(uiTheme));
+      }
+    } catch (e) {}
+  }, [dispatch]);
+
   useEffect(() => {
     loadFavoriteUniversities();
-  }, [loadFavoriteUniversities]);
+    loadUITheme();
+  }, [loadFavoriteUniversities, loadUITheme]);
 
   return (
     <>

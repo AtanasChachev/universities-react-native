@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from 'react-native';
-import { useColor } from '@src/styles/colors';
+import { useTheme } from '@src/styles/hooks/useTheme';
 type ButtonType = {
   text: string;
   icon?: ImageSourcePropType;
@@ -14,7 +14,7 @@ type ButtonType = {
 };
 
 const Button = ({ text, icon, onPress }: ButtonType) => {
-  const theme = useColor();
+  const theme = useTheme();
 
   return (
     <TouchableOpacity

@@ -10,7 +10,7 @@ import {
   UniversitiesDetailed,
   FavoriteUniversities,
 } from '@src/pages';
-import { useColor } from '@src/styles/colors';
+import { useTheme } from '@src/styles/hooks/useTheme';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Store } from '@src/models/store/store';
@@ -29,7 +29,7 @@ const getScreenOptions = (theme: Colors) => {
 };
 
 const HomeScreensStack = () => {
-  const theme = useColor();
+  const theme = useTheme();
 
   return (
     <HomeStack.Navigator screenOptions={getScreenOptions(theme)}>
@@ -55,7 +55,7 @@ const HomeScreensStack = () => {
 };
 
 const FavoritesScreenStack = () => {
-  const theme = useColor();
+  const theme = useTheme();
 
   return (
     <FavoritesStack.Navigator screenOptions={getScreenOptions(theme)}>
@@ -77,7 +77,7 @@ const FavoritesScreenStack = () => {
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
-  const theme = useColor();
+  const theme = useTheme();
   const { favoriteUniversitiesLength } = useSelector(
     (store: Store) => store.universities,
   );

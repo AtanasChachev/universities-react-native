@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
 import { ScrollView } from 'react-native';
@@ -12,10 +12,6 @@ const UniversitiesDetailed = ({ navigation }: any) => {
   const { current } = useSelector((store: Store) => store.universities);
   const [isScrollingDown, updateIsScrollingDown] = useState(false);
   const [scrollingOffset, updateScrollingOffset] = useState(0);
-
-  useEffect(() => {
-    console.log(current);
-  }, [current]);
 
   const detectScrollDirection = useCallback(
     event => {

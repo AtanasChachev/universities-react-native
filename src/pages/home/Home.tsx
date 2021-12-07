@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
 import { AnimatedHolder, Button } from '@src/components';
-import { useColor } from '@src/styles/colors';
+import { useTheme } from '@src/styles/hooks/useTheme';
 import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
 import { universitiesService } from '@src/services/universities';
@@ -12,7 +12,7 @@ import { University } from '@src/models/store/universities';
 
 const Home = ({ navigation }: any) => {
   const dispatch = useDispatch();
-  const theme = useColor();
+  const theme = useTheme();
 
   const addUniversityImageAndStat = useCallback(
     (universities: University[]) => {
@@ -44,7 +44,6 @@ const Home = ({ navigation }: any) => {
 
         dispatch(shShowLoader(false));
       } catch (e) {
-        console.log(e);
         dispatch(shShowLoader(false));
       }
     },
