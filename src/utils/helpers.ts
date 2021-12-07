@@ -1,6 +1,7 @@
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { University } from '@src/models/store/universities';
+import { Linking } from 'react-native';
 
 /*
   Function which shows the toast. Accepts three arguements.
@@ -30,6 +31,7 @@ export const getData = async (key: string) => {
   return await AsyncStorage.getItem(key);
 };
 
+/* Checking if the university is already liked after favorites are being fetched from the AsyncStorage */
 export const checkIfIsLiked = (
   favoriteUniversities: University[],
   university: University,
@@ -41,4 +43,9 @@ export const checkIfIsLiked = (
   if (activeUniversityIndex > -1) {
     university.isLiked = true;
   }
+};
+
+/* Opening external url in a browser */
+export const openUrl = async (url: string) => {
+  await Linking.openURL(url);
 };

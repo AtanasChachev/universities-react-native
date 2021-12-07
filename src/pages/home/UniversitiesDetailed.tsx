@@ -39,6 +39,7 @@ const UniversitiesDetailed = ({ navigation }: any) => {
         onScroll={event => detectScrollDirection(event)}>
         {current && current.image && (
           <DetailedHero
+            url={current.web_pages[0]}
             image={current.image}
             likes={current.likes}
             isUniversityLiked={current.isLiked}
