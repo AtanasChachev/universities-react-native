@@ -1,7 +1,9 @@
 import { useTheme } from '@src/styles/hooks/useTheme';
 import { getScreenOptions } from '../utils';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home, Universities, UniversitiesDetailed } from '@src/pages';
+import Home from '@src/pages/Home';
+import Universities from '@src/pages/Universities';
+import UniversitiesDetailed from '@src/pages/Universities/UniversitiesDetailed/UniversitiesDetailed';
 
 const HomeStack = createStackNavigator();
 

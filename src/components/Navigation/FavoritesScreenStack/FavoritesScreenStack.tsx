@@ -1,7 +1,8 @@
 import { useTheme } from '@src/styles/hooks/useTheme';
 import { getScreenOptions } from '../utils';
 import { createStackNavigator } from '@react-navigation/stack';
-import { UniversitiesDetailed, FavoriteUniversities } from '@src/pages';
+import UniversitiesDetailed from '@src/pages/Universities/UniversitiesDetailed/UniversitiesDetailed';
+import FavoriteUniversities from '@src/pages/Favorites';
 
 const FavoritesStack = createStackNavigator();
 

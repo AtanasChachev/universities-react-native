@@ -1,8 +1,8 @@
 
 { 
   "compilerOptions": {
-   "target": "esnext",
-   "module": "commonjs",
+   "target": "es5",
+   "module": "esnext",
    "lib": ["es2015", "es2015.promise", "es2016.array.include", "dom", "es2017"],
    "allowJs": true,
    "jsx": "react-jsx",

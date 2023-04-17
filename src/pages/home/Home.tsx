@@ -18,18 +18,20 @@ const Home = ({ navigation }: any): JSX.Element => {
             fetchUniversitiesByCountry(country.id);
           };
 
-          <AnimatedHolder
-            shAnimateOnInit={true}
-            key={index}
-            outputRangeFirst={20}
-            duration={500}
-            delay={index * 200}>
-            <Button
-              onPress={handleOnPress}
-              text={country.name}
-              icon={country.image}
-            />
-          </AnimatedHolder>;
+          return (
+            <AnimatedHolder
+              shAnimateOnInit={true}
+              key={index}
+              outputRangeFirst={20}
+              duration={500}
+              delay={index * 200}>
+              <Button
+                onPress={handleOnPress}
+                text={country.name}
+                icon={country.image}
+              />
+            </AnimatedHolder>
+          );
         })}
       </View>
     </SafeAreaView>
