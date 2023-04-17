@@ -8,9 +8,6 @@ interface UseAnimatedHolderProps
     'pointerEvents' | 'styles' | 'children' | 'translateHorizontal'
   > {}
 
-/**
- * TODO - Find proper types
- */
 interface Return {
   opacity: Animated.AnimatedInterpolation;
   translateInterpolation: Animated.AnimatedInterpolation;
