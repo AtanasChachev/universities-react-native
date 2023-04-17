@@ -1,3 +1,6 @@
+**WARNING!**
+This branch is using `axios` alongside with plain `redux` / `react-redux` for data state management. The `main` branch uses `react-query` with `zustand`.
+
 **Requirements**
 
 * `node version:`  **v14.9.0**
