@@ -1,60 +1,23 @@
-import React, { useCallback } from 'react';
-import { SafeAreaView, View, StyleSheet } from 'react-native';
-import { AnimatedHolder, Button } from '@src/components';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { SafeAreaView, View } from 'react-native';
+import AnimatedHolder from '@src/components/AnimatedHolder';
+import Button from '@src/components/Button';
 import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
-import { universitiesService } from '@src/services/universities';
-import { useDispatch } from 'react-redux';
-import { updateUniversities } from '@src/store/actions/universities';
-import { shShowLoader } from '@src/store/actions/app';
-import { University } from '@src/models/store/universities';
+import { styles } from './styles';
+import { useHome } from './useHome';
 
-const Home = ({ navigation }: any) => {
-  const dispatch = useDispatch();
-  const theme = useTheme();
-
-  const addUniversityImageAndStat = useCallback(
-    (universities: University[]) => {
-      universities.map((university: University) => {
-        university.image =
-          SETTINGS.universityImages[
-            Math.floor(Math.random() * SETTINGS.universityImages.length)
-          ];
-        university.likes = Math.round(Math.random() * 100) + 1;
-      });
-    },
-    [],
-  );
-
-  const fetchUniversitiesByCountry = useCallback(
-    async (country: string) => {
-      dispatch(shShowLoader(true));
-
-      try {
-        const { data } = await universitiesService.fetchUniversitiesByCountry(
-          country,
-        );
-
-        if (data.length) {
-          addUniversityImageAndStat(data);
-          dispatch(updateUniversities(data));
-          navigation.navigate('UniversitiesScreen');
-        }
-
-        dispatch(shShowLoader(false));
-      } catch (e) {
-        dispatch(shShowLoader(false));
-      }
-    },
-    [addUniversityImageAndStat, dispatch, navigation],
-  );
+const Home = ({ navigation }: any): JSX.Element => {
+  const { theme, fetchUniversitiesByCountry } = useHome({ navigation });
 
   return (
     <SafeAreaView
       style={{ ...styles.holder, backgroundColor: theme.background }}>
       <View style={styles.buttonHolder}>
-        {SETTINGS.countries.map((country: Country, index: number) => (
+        {SETTINGS.countries.map((country: Country, index: number) => {
+          const handleOnPress = (): void => {
+            fetchUniversitiesByCountry(country.id);
+          };
+
           <AnimatedHolder
             shAnimateOnInit={true}
             key={index}
@@ -62,29 +25,15 @@ const Home = ({ navigation }: any) => {
             duration={500}
             delay={index * 200}>
             <Button
-              onPress={() => {
-                /* TODO - Save current selected country in store */
-                fetchUniversitiesByCountry(country.id);
-              }}
+              onPress={handleOnPress}
               text={country.name}
               icon={country.image}
             />
-          </AnimatedHolder>
-        ))}
+          </AnimatedHolder>;
+        })}
       </View>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  holder: {
-    flex: 1,
-  },
-  buttonHolder: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 40,
-  },
-});
-
-export { Home };
+export default Home;

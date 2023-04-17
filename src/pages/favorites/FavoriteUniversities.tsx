@@ -1,14 +1,15 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import { University } from '@src/models/store/universities';
-import { AnimatedHolder, VirtualizedCardsList } from '@src/components';
+import AnimatedHolder from '@src/components/AnimatedHolder';
+import VirtualizedCardsList from '@src/components/Universities/VirtualizedCardList';
 import { useTheme } from '@src/styles/hooks/useTheme';
 import { updateCurrentUniversity } from '@src/store/actions/universities';
 import { checkIfIsLiked } from '@src/utils/helpers';
+import { styles } from './styles';
 
-const FavoriteUniversities = ({ navigation }: any) => {
+const FavoriteUniversities = ({ navigation }: any): JSX.Element => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -16,7 +17,7 @@ const FavoriteUniversities = ({ navigation }: any) => {
     (store: Store) => store.universities,
   );
 
-  const RenderEmptyListMessage = () => (
+  const RenderEmptyListMessage = (): JSX.Element => (
     <View style={styles.emptyHolder}>
       <Text style={{ ...styles.emptyHolderHeading, color: theme.iconActive }}>
         Oooppps...
@@ -38,7 +39,7 @@ const FavoriteUniversities = ({ navigation }: any) => {
         <VirtualizedCardsList
           ListEmptyComponent={<RenderEmptyListMessage />}
           universities={favoriteUniversities}
-          onPress={(university: University) => {
+          onPress={(university: University): void => {
             checkIfIsLiked(favoriteUniversities, university);
             dispatch(updateCurrentUniversity(university));
             navigation.navigate('UniversitiesDetailed');
@@ -49,17 +50,4 @@ const FavoriteUniversities = ({ navigation }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  holder: {
-    flex: 1,
-  },
-  emptyHolder: {
-    padding: 20,
-  },
-  emptyHolderHeading: {
-    fontSize: 18,
-    paddingBottom: 10,
-  },
-});
-
-export { FavoriteUniversities };
+export default FavoriteUniversities;

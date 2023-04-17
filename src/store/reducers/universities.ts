@@ -17,7 +17,7 @@ const universitiesState: UniversitiesState = {
 const UniversitiesReducer = (
   state: UniversitiesState = universitiesState,
   action: any,
-) => {
+): UniversitiesState => {
   switch (action.type) {
     case UPDATE_UNIVERSITIES: {
       return { ...state, universities: action.payload };

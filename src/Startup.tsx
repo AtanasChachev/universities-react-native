@@ -1,6 +1,7 @@
-import React, { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { StatusBar } from 'react-native';
-import { Navigation, Loader } from '@src/components';
+import Loader from './components/Loader';
+import Navigation from './components/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,7 +10,7 @@ import { getData, showToastMessage } from '@src/utils/helpers';
 import { updateTheme } from './store/actions/app';
 import Toast from 'react-native-toast-message';
 
-const Startup = () => {
+const Startup = (): JSX.Element => {
   const dispatch = useDispatch();
   const insets = useSafeAreaInsets();
   const { showLoader, theme } = useSelector((store: Store) => store.app);

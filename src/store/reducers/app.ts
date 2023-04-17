@@ -6,7 +6,7 @@ const appState: AppState = {
   theme: 'light',
 };
 
-const AppReducer = (state: AppState = appState, action: any) => {
+const AppReducer = (state: AppState = appState, action: any): AppState => {
   switch (action.type) {
     case UPDATE_LOADER: {
       return { ...state, showLoader: action.payload };

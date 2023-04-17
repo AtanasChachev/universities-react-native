@@ -13,7 +13,7 @@ export const showToastMessage = (
   type: string,
   text1: string,
   text2: string,
-) => {
+): void => {
   Toast.show({
     type: type,
     text1: text1,
@@ -22,12 +22,12 @@ export const showToastMessage = (
 };
 
 /* Storing data in the async storage */
-export const storeData = async (key: string, value: string) => {
+export const storeData = async (key: string, value: string): Promise<void> => {
   return await AsyncStorage.setItem(key, value);
 };
 
 /* Get data in the async storage */
-export const getData = async (key: string) => {
+export const getData = async (key: string): Promise<string | null> => {
   return await AsyncStorage.getItem(key);
 };
 
@@ -35,7 +35,7 @@ export const getData = async (key: string) => {
 export const checkIfIsLiked = (
   favoriteUniversities: University[],
   university: University,
-) => {
+): void => {
   const activeUniversityIndex = favoriteUniversities.findIndex(
     (_university: University) => _university.name === university.name,
   );
@@ -46,6 +46,6 @@ export const checkIfIsLiked = (
 };
 
 /* Opening external url in a browser */
-export const openUrl = async (url: string) => {
+export const openUrl = async (url: string): Promise<void> => {
   await Linking.openURL(url);
 };

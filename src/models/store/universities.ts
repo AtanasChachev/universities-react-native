@@ -18,3 +18,23 @@ export type University = {
   name: string;
   domains: string[];
 };
+
+export interface UpdateUniversitiesActionReturn {
+  type: Symbol;
+  payload: University[];
+}
+export interface UpdateCurrentUniversityActionReturn {
+  type: Symbol;
+  payload: University;
+}
+export interface UpdateFavoriteUniversitiesActionReturn {
+  type: Symbol;
+  payload: University[];
+}
+export interface UpdateFavoriteUniversityActionReturn {
+  type: Symbol;
+  payload: {
+    actionCallback: string;
+    university: University;
+  };
+}
