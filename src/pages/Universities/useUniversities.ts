@@ -1,10 +1,12 @@
 import { useTheme } from '@src/styles/hooks/useTheme';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Store } from '@src/models/store/store';
-import { checkIfIsLiked } from '@src/utils/helpers';
-import { updateCurrentUniversity } from '@src/store/actions/universities';
+// import { checkIfIsLiked } from '@src/utils/helpers';
+// import { updateCurrentUniversity } from '@src/store/actions/universities';
 import { University } from '@src/models/store/universities';
 import { Colors } from '@src/models/colors';
+import { useGetUniversitiesByCountry } from '@src/services/universities/getUniversitiesByCountry';
+import { addUniversityImageAndStat } from './utils';
 
 interface Return {
   theme: Colors;
@@ -12,17 +14,35 @@ interface Return {
   handleCardPress: (university: University) => void;
 }
 
-export const useUniversities = ({ navigation }: any): Return => {
-  const dispatch = useDispatch();
+interface UseUniversitiesProps {
+  navigation: any;
+  id: string;
+}
+
+export const useUniversities = ({
+  navigation,
+  id,
+}: UseUniversitiesProps): Return => {
+  // const dispatch = useDispatch();
   const theme = useTheme();
-  const { universities, favoriteUniversities } = useSelector(
+
+  const { favoriteUniversities } = useSelector(
     (store: Store) => store.universities,
   );
 
+  const { universities: apiUniversities } = useGetUniversitiesByCountry({
+    id,
+  });
+  const universities = addUniversityImageAndStat(
+    apiUniversities,
+    favoriteUniversities,
+  );
+
   const handleCardPress = (university: University): void => {
-    checkIfIsLiked(favoriteUniversities, university);
-    dispatch(updateCurrentUniversity(university));
-    navigation.navigate('UniversitiesDetailed');
+    // dispatch(updateCurrentUniversity(university));
+    navigation.navigate('UniversitiesDetailed', {
+      university,
+    });
   };
 
   return {

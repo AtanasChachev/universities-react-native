@@ -22,12 +22,15 @@ export const useVirtualizedCardsList = ({
 }: UseVirtualizedCardsListProps): Return => {
   const RenderItem = ({ item }: VirtualizedItem): JSX.Element => {
     const handleOnPress = (): void => onPress(item.university);
+    const { university } = item;
+    const { isLiked, likes, name, image } = university;
 
     return (
       <Card
-        numberOfLikes={item.university.likes}
-        title={item.university.name}
-        image={item.university.image}
+        isLiked={isLiked}
+        numberOfLikes={likes}
+        title={name}
+        image={image}
         onPress={handleOnPress}
       />
     );

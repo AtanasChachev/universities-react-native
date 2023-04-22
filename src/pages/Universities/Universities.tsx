@@ -3,9 +3,11 @@ import AnimatedHolder from '@src/components/AnimatedHolder';
 import VirtualizedCardsList from '@src/components/Universities/VirtualizedCardList';
 import { useUniversities } from './useUniversities';
 
-const Universities = ({ navigation }: any): JSX.Element => {
-  const { theme, universities, handleCardPress } = useUniversities({
+const Universities = ({ route, navigation }: any): JSX.Element => {
+  const { id } = route.params;
+  const { universities, handleCardPress, theme } = useUniversities({
     navigation,
+    id,
   });
 
   return (

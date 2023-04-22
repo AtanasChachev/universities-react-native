@@ -9,6 +9,7 @@ const Card = ({
   title,
   image,
   numberOfLikes,
+  isLiked,
   onPress,
 }: CardProps): JSX.Element => {
   const theme = useTheme();
@@ -34,7 +35,11 @@ const Card = ({
           <View style={styles.statsHolder}>
             {numberOfLikes && (
               <View style={styles.stats}>
-                <Icon color={theme.iconActive} name="heart" size={30} />
+                <Icon
+                  color={theme.iconActive}
+                  name={isLiked ? 'heart' : 'heart-outline'}
+                  size={30}
+                />
                 <Text style={{ ...styles.likes, color: theme.text }}>
                   {numberOfLikes}
                 </Text>

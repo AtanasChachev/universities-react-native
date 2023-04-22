@@ -8,7 +8,7 @@ export type UniversitiesState = {
 };
 
 export type University = {
-  'state-province'?: string | null;
+  'state-province'?: string;
   image?: ImageSourcePropType;
   likes?: number;
   isLiked?: boolean;

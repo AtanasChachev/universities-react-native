@@ -5,31 +5,31 @@ import RenderHTML from '@src/components/RenderHTML';
 import { universityMockUpHTMLData } from '@src/config/mockup-data';
 import { useUniversitiesDetailed } from './useUniversitiesDetailed';
 
-const UniversitiesDetailed = ({ navigation }: any): JSX.Element => {
+const UniversitiesDetailed = ({ route, navigation }: any): JSX.Element => {
   const {
+    university,
     isScrollingDown,
-    current,
     handleDetailedHeroPress,
     detectScrollDirection,
     handleOnBack,
-  } = useUniversitiesDetailed({ navigation });
+  } = useUniversitiesDetailed({ route, navigation });
 
   return (
     <>
       <DetailedFixedHeader
         pointerEvents={isScrollingDown ? 'none' : 'auto'}
-        name={current?.name}
+        name={university?.name}
         animatePropState={!isScrollingDown ? 1 : 0}
         onGoBack={handleOnBack}
       />
 
       <ScrollView scrollEventThrottle={16} onScroll={detectScrollDirection}>
-        {current && current.image && (
+        {university && university.image && (
           <DetailedHero
-            url={current.web_pages[0]}
-            image={current.image}
-            likes={current.likes}
-            isUniversityLiked={current.isLiked}
+            url={university.web_pages[0]}
+            image={university.image}
+            likes={university.likes}
+            isUniversityLiked={university.isLiked}
             onPress={handleDetailedHeroPress}
           />
         )}
