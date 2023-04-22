@@ -1,17 +1,5 @@
-import { ImageSourcePropType } from 'react-native';
 import { GenericQueryResponse } from '../types';
-
-export interface University {
-  'state-province'?: string;
-  image?: ImageSourcePropType;
-  likes?: number;
-  isLiked?: boolean;
-  web_pages: string[];
-  alpha_two_code: string;
-  country: string;
-  name: string;
-  domains: string[];
-}
+import { University } from '@src/models/store/universities';
 
 export interface GetUniversitiesQueriesReturn extends GenericQueryResponse {
   universities: University[];

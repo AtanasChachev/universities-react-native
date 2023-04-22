@@ -6,7 +6,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import Settings from '@src/pages/Settings';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Store } from '@src/models/store/store';

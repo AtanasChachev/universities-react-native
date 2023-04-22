@@ -25,7 +25,6 @@ export const storeData = async (key: string, value: string): Promise<void> => {
   return await AsyncStorage.setItem(key, value);
 };
 
-/* Get data in the async storage */
 export const getData = async (key: string): Promise<string | null> => {
   return await AsyncStorage.getItem(key);
 };

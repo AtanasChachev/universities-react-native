@@ -1,5 +1,5 @@
 import { SETTINGS } from '@src/config/settings';
-import { University } from '@src/services/universities/types';
+import { University } from '@src/models/store/universities';
 
 /**
  * Since the API is very limited and does not support additional properties,
@@ -10,16 +10,17 @@ export const addUniversityImageAndStat = (
   favorites: University[],
 ): University[] =>
   universities.map((university: University) => {
-    const { universityImages } = SETTINGS;
     const { name: universityName } = university;
-    const isLiked = favorites.some(({ name }: any) => name === universityName);
+    const isLiked = favorites.some(
+      ({ name }: University) => name === universityName,
+    );
 
     return {
       ...university,
       isLiked,
       likes: Math.round(Math.random() * 100) + 1,
       image:
-        universityImages[
+        SETTINGS.universityImages[
           Math.floor(Math.random() * SETTINGS.universityImages.length)
         ],
     };

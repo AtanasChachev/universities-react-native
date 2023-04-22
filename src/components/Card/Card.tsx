@@ -1,6 +1,6 @@
 import { View, Text, ImageBackground } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './styles';
 import { CardProps } from './types';

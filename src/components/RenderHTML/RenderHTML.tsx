@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
 import { useWindowDimensions } from 'react-native';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { styles } from './styles';
 import { RenderHTMLProps, RenderHTMLComponentProps } from './types';
 

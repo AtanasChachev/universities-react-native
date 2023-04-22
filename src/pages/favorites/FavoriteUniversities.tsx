@@ -1,30 +1,12 @@
-import { useSelector } from 'react-redux';
-import { Store } from '@src/models/store/store';
-import { SafeAreaView, View, Text } from 'react-native';
-import { University } from '@src/models/store/universities';
+import { SafeAreaView } from 'react-native';
 import AnimatedHolder from '@src/components/AnimatedHolder';
 import VirtualizedCardsList from '@src/components/Universities/VirtualizedCardList';
-import { useTheme } from '@src/styles/hooks/useTheme';
 import { styles } from './styles';
+import { useFavoriteUniversities } from './useFavoriteUniversities';
 
 const FavoriteUniversities = ({ navigation }: any): JSX.Element => {
-  const theme = useTheme();
-  // const dispatch = useDispatch();
-
-  const { favoriteUniversities } = useSelector(
-    (store: Store) => store.universities,
-  );
-
-  const RenderEmptyListMessage = (): JSX.Element => (
-    <View style={styles.emptyHolder}>
-      <Text style={{ ...styles.emptyHolderHeading, color: theme.iconActive }}>
-        Oooppps...
-      </Text>
-      <Text style={{ color: theme.text }}>
-        It seems you don't have any favorite universities yet!
-      </Text>
-    </View>
-  );
+  const { theme, favoriteUniversities, handleOnPress, ListEmptyComponent } =
+    useFavoriteUniversities({ navigation });
 
   return (
     <SafeAreaView
@@ -35,15 +17,9 @@ const FavoriteUniversities = ({ navigation }: any): JSX.Element => {
         delay={400}
         duration={400}>
         <VirtualizedCardsList
-          ListEmptyComponent={<RenderEmptyListMessage />}
+          ListEmptyComponent={<ListEmptyComponent />}
           universities={favoriteUniversities}
-          onPress={(university: University): void => {
-            const mappedUniversity = { ...university, isLiked: true };
-
-            navigation.navigate('UniversitiesDetailed', {
-              university: mappedUniversity,
-            });
-          }}
+          onPress={handleOnPress}
         />
       </AnimatedHolder>
     </SafeAreaView>

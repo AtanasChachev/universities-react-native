@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryFetcher } from '@src/services';
-import { University, GetUniversitiesQueriesReturn } from '../types';
+import { GetUniversitiesQueriesReturn } from '../types';
+import { University } from '@src/models/store/universities';
 import { UseGetUniversitiesByCountryProps } from './types';
 
 export const useGetUniversitiesByCountry = ({

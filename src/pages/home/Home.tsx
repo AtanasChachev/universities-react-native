@@ -4,7 +4,7 @@ import Button from '@src/components/Button';
 import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
 import { styles } from './styles';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 
 const Home = ({ navigation }: any): JSX.Element => {
   const theme = useTheme();

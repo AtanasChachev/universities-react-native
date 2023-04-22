@@ -1,5 +1,5 @@
 import { Image, TouchableOpacity, Text } from 'react-native';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { styles } from './styles';
 import { ButtonProps } from './types';
 

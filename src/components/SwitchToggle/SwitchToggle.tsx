@@ -1,4 +1,4 @@
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { Switch } from 'react-native';
 import { SwitchToggleProps } from './types';
 import { useSwitchToggle } from './useSwitchToggle';

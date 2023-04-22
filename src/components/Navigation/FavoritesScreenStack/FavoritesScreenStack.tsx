@@ -1,4 +1,4 @@
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { getScreenOptions } from '../utils';
 import { createStackNavigator } from '@react-navigation/stack';
 import UniversitiesDetailed from '@src/pages/Universities/UniversitiesDetailed/UniversitiesDetailed';

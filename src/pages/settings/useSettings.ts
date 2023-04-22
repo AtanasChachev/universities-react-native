@@ -1,7 +1,7 @@
 import { storeData } from '@src/utils/helpers';
 import { updateTheme } from '@src/store/actions/app';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from '@src/styles/hooks/useTheme';
+import { useTheme } from '@src/hooks/useTheme';
 import { Store } from '@src/models/store/store';
 import { Colors } from '@src/models/colors';
 
