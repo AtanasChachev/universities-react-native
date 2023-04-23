@@ -1,3 +1,7 @@
+**NOTE**: 
+
+The current branch uses `tanstack-query` for the http requests and `zustand` for state management. The initial implementation was using `axios` with `react-redux`, this solution can be found in the `feature/axios-react-redux` branch.
+
 **Requirements**
 
 * `node version:`  **v14.9.0**
@@ -16,11 +20,12 @@
 
 **For iOS**
 
-1. `yarn` to install the dependencies.
-2. `cd ios`
-3. `pod install && cd ..`
-4. `npx react-native start` to start the metro bundler.
-5. `npx react-native run-ios` this should automatically start the iOS Simulator and the run the app , if that doesn't work try to open the `ios` folder and  run it manually from there.
+1. Create `.env` in the root folder, copy the env variables from `.env.example` and put them in the `.env` you've created.
+2. `yarn` to install the dependencies.
+3. `cd ios`
+4. `pod install && cd ..`
+5. `npx react-native start` to start the metro bundler.
+6. `npx react-native run-ios` this should automatically start the iOS Simulator and the run the app , if that doesn't work try to open the `ios` folder and  run it manually from there.
 
 <br />
 
@@ -35,9 +40,10 @@
 
 **For Android**
 
-1. `yarn` to install the dependencies.
-2. `npx react-native start` to start the metro bundler.
-3. `npx react-native run-android`
+1. Create `.env` in the root folder, copy the env variables from `.env.example` and put them in the `.env` you've created.
+2. `yarn` to install the dependencies.
+3. `npx react-native start` to start the metro bundler.
+4. `npx react-native run-android`
 
 <br />
 

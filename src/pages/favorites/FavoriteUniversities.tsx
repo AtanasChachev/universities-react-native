@@ -3,8 +3,11 @@ import AnimatedHolder from '@src/components/AnimatedHolder';
 import VirtualizedCardsList from '@src/components/Universities/VirtualizedCardList';
 import { styles } from './styles';
 import { useFavoriteUniversities } from './useFavoriteUniversities';
+import { FavoriteUniversitiesProps } from './types';
 
-const FavoriteUniversities = ({ navigation }: any): JSX.Element => {
+const FavoriteUniversities = ({
+  navigation,
+}: FavoriteUniversitiesProps): JSX.Element => {
   const { theme, favoriteUniversities, handleOnPress, ListEmptyComponent } =
     useFavoriteUniversities({ navigation });
 

@@ -1,15 +1,17 @@
-import { useSelector } from 'react-redux';
-import { Store } from '@src/models/store/store';
 import { View, Text } from 'react-native';
 import { styles } from './styles';
-import { University } from '@src/models/store/universities';
+import { UniversitiesState, University } from '@src/models/store/universities';
 import { useTheme } from '@src/hooks/useTheme';
 import { Return } from './types';
+import { useUniversitiesStore } from '@src/store/useUniversitiesStore';
+import { FavoriteUniversitiesProps } from './types';
 
-export const useFavoriteUniversities = ({ navigation }: any): Return => {
+export const useFavoriteUniversities = ({
+  navigation,
+}: FavoriteUniversitiesProps): Return => {
   const theme = useTheme();
-  const { favoriteUniversities } = useSelector(
-    (store: Store) => store.universities,
+  const { favoriteUniversities } = useUniversitiesStore(
+    (state: UniversitiesState) => state,
   );
 
   const handleOnPress = (university: University): void => {

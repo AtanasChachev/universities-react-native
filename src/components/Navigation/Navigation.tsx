@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   BottomTabNavigationOptions,
@@ -9,16 +8,17 @@ import Settings from '@src/pages/Settings';
 import { useTheme } from '@src/hooks/useTheme';
 import { SETTINGS } from '@src/config/settings';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Store } from '@src/models/store/store';
 import HomeScreensStack from './HomeScreensStack';
 import FavoritesScreenStack from './FavoritesScreenStack';
+import { useUniversitiesStore } from '@src/store/useUniversitiesStore';
+import { UniversitiesState } from '@src/models/store/universities';
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = (): JSX.Element => {
   const theme = useTheme();
-  const { favoriteUniversitiesLength } = useSelector(
-    (store: Store) => store.universities,
+  const { favoriteUniversitiesLength } = useUniversitiesStore(
+    (state: UniversitiesState) => state,
   );
 
   const renderTabBarIcon = (

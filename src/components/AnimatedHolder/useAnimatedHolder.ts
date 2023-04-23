@@ -30,7 +30,7 @@ export const useAnimatedHolder = ({
   });
 
   const startSlideAnimation = useCallback(
-    (value: number, target: any) => {
+    (value: number, target: Animated.Value | Animated.ValueXY) => {
       Animated.timing(target, {
         toValue: value,
         duration: duration,
@@ -46,7 +46,7 @@ export const useAnimatedHolder = ({
     if (shAnimateOnInit) {
       startSlideAnimation(1, translate);
       startSlideAnimation(1, opacity);
-    } else {
+    } else if (animatePropState) {
       startSlideAnimation(animatePropState, translate);
       startSlideAnimation(animatePropState, opacity);
     }

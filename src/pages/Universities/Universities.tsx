@@ -2,8 +2,12 @@ import { SafeAreaView } from 'react-native';
 import AnimatedHolder from '@src/components/AnimatedHolder';
 import VirtualizedCardsList from '@src/components/Universities/VirtualizedCardList';
 import { useUniversities } from './useUniversities';
+import { UniversitiesProps } from './types';
 
-const Universities = ({ route, navigation }: any): JSX.Element => {
+const Universities = ({
+  route,
+  navigation,
+}: UniversitiesProps): JSX.Element => {
   const { id } = route.params;
   const { universities, handleCardPress, theme } = useUniversities({
     navigation,

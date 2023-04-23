@@ -1,15 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Store } from '@src/models/store/store';
 import { getData, showToastMessage } from '@src/utils/helpers';
 import { useCallback, useEffect } from 'react';
-import { updateTheme } from '@src/store/actions/app';
-import { updateFavoriteUniversities } from '@src/store/actions/universities';
+import { useUniversitiesStore } from '@src/store/useUniversitiesStore';
 import { StatusBarStyle } from 'react-native';
 import { Return } from './types';
+import { useAppStore } from '@src/store/useAppStore';
+import { AppState } from '@src/models/store/app';
+import { UniversitiesState } from '@src/models/store/universities';
 
 export const useStartup = (): Return => {
-  const dispatch = useDispatch();
-  const { showLoader, theme } = useSelector((store: Store) => store.app);
+  const { updateFavoriteUniversities } = useUniversitiesStore(
+    (state: UniversitiesState) => state,
+  );
+  const { theme, showLoader, updateTheme } = useAppStore(
+    (state: AppState) => state,
+  );
 
   const loadFavoriteUniversities = useCallback(async () => {
     try {
@@ -19,7 +23,7 @@ export const useStartup = (): Return => {
         return;
       }
 
-      dispatch(updateFavoriteUniversities(JSON.parse(favoriteUniversities)));
+      updateFavoriteUniversities(JSON.parse(favoriteUniversities));
     } catch (e) {
       showToastMessage(
         'error',
@@ -27,7 +31,7 @@ export const useStartup = (): Return => {
         'Unfortunately, we could not load your favorite universities :(',
       );
     }
-  }, [dispatch]);
+  }, [updateFavoriteUniversities]);
 
   const loadUITheme = useCallback(async () => {
     try {
@@ -37,11 +41,11 @@ export const useStartup = (): Return => {
         return;
       }
 
-      dispatch(updateTheme(uiTheme));
+      updateTheme(uiTheme);
     } catch (e) {
       showToastMessage('error', 'Error', 'We could not load the theme');
     }
-  }, [dispatch]);
+  }, [updateTheme]);
 
   const handleLoadCallbacksEffect = (): void => {
     loadFavoriteUniversities();

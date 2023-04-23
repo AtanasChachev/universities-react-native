@@ -10,7 +10,7 @@ export interface AnimatedHolderProps {
   children: ReactNode | ReactNode[];
   translateHorizontal?: boolean;
   shAnimateOnInit?: boolean;
-  animatePropState?: any;
+  animatePropState?: number;
   pointerEvents?: AnimatedPointerEvents;
 }
 

@@ -1,13 +1,19 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateFavoriteUniversity } from '@src/store/actions/universities';
 import { Return } from './types';
+import { useUniversitiesStore } from '@src/store/useUniversitiesStore';
+import { UniversitiesState } from '@src/models/store/universities';
+import { UniversitiesDetailedProps } from './types';
 
-export const useUniversitiesDetailed = ({ route, navigation }: any): Return => {
-  const dispatch = useDispatch();
+export const useUniversitiesDetailed = ({
+  route,
+  navigation,
+}: UniversitiesDetailedProps): Return => {
   const { university } = route.params;
   const [isScrollingDown, updateIsScrollingDown] = useState(false);
   const [scrollingOffset, updateScrollingOffset] = useState(0);
+  const { updateFavoriteUniversity } = useUniversitiesStore(
+    (state: UniversitiesState) => state,
+  );
 
   const detectScrollDirection = useCallback(
     event => {
@@ -21,18 +27,16 @@ export const useUniversitiesDetailed = ({ route, navigation }: any): Return => {
     [scrollingOffset],
   );
 
-  const handleDetailedHeroPress = (action: string): void => {
+  const handleDetailedHeroPress = (): void => {
     if (!university) {
       return;
     }
 
     const mappedUniversity = { ...university, isLiked: true };
-    dispatch(updateFavoriteUniversity(action, mappedUniversity));
+    updateFavoriteUniversity(mappedUniversity);
   };
 
-  const handleOnBack = (): void => {
-    navigation.goBack();
-  };
+  const handleOnBack = (): void => navigation.goBack();
 
   return {
     university,

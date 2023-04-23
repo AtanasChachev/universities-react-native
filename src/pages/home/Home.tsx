@@ -5,8 +5,9 @@ import { SETTINGS } from '@src/config/settings';
 import { Country } from '@src/models/settings';
 import { styles } from './styles';
 import { useTheme } from '@src/hooks/useTheme';
+import { HomeProps } from './types';
 
-const Home = ({ navigation }: any): JSX.Element => {
+const Home = ({ navigation }: HomeProps): JSX.Element => {
   const theme = useTheme();
 
   return (

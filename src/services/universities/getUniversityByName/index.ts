@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryFetcher } from '@src/services';
-import { University, GetUniversitiesQueriesReturn } from '../types';
+import { GetUniversitiesQueriesReturn } from '../types';
 import { UseGetUniversitiesByNameProps } from './types';
+import { University } from '@src/models/store/universities';
 
 export const useGetUniversitiesByName = ({
   id,

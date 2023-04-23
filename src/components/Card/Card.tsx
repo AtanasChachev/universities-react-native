@@ -45,10 +45,6 @@ const Card = ({
                 </Text>
               </View>
             )}
-
-            <Text style={{ ...styles.anchor, color: theme.iconActive }}>
-              View more
-            </Text>
           </View>
         </View>
       </TouchableOpacity>

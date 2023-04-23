@@ -1,10 +1,12 @@
 import { useTheme } from '@src/hooks/useTheme';
-import { useSelector } from 'react-redux';
-import { Store } from '@src/models/store/store';
-import { University } from '@src/models/store/universities';
+import { UniversitiesState, University } from '@src/models/store/universities';
 import { useGetUniversitiesByCountry } from '@src/services/universities/getUniversitiesByCountry';
 import { addUniversityImageAndStat } from './utils';
 import { Return, UseUniversitiesProps } from './types';
+import { useUniversitiesStore } from '@src/store/useUniversitiesStore';
+import { useEffect } from 'react';
+import { useAppStore } from '@src/store/useAppStore';
+import { AppState } from '@src/models/store/app';
 
 export const useUniversities = ({
   navigation,
@@ -12,13 +14,15 @@ export const useUniversities = ({
 }: UseUniversitiesProps): Return => {
   const theme = useTheme();
 
-  const { favoriteUniversities } = useSelector(
-    (store: Store) => store.universities,
+  const { updateShowLoader } = useAppStore((state: AppState) => state);
+  const { favoriteUniversities } = useUniversitiesStore(
+    (state: UniversitiesState) => state,
   );
 
-  const { universities: apiUniversities } = useGetUniversitiesByCountry({
-    id,
-  });
+  const { universities: apiUniversities, isFetching } =
+    useGetUniversitiesByCountry({
+      id,
+    });
   const universities = addUniversityImageAndStat(
     apiUniversities,
     favoriteUniversities,
@@ -29,6 +33,9 @@ export const useUniversities = ({
       university,
     });
   };
+
+  const handleUpdateShowLoaderEffect = (): void => updateShowLoader(isFetching);
+  useEffect(handleUpdateShowLoaderEffect, [isFetching, updateShowLoader]);
 
   return {
     theme,

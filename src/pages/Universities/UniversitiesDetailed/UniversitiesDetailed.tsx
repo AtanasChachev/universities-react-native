@@ -4,8 +4,12 @@ import DetailedFixedHeader from '@src/components/Universities/DetailedFixedHeade
 import RenderHTML from '@src/components/RenderHTML';
 import { universityMockUpHTMLData } from '@src/config/mockup-data';
 import { useUniversitiesDetailed } from './useUniversitiesDetailed';
+import { UniversitiesDetailedProps } from './types';
 
-const UniversitiesDetailed = ({ route, navigation }: any): JSX.Element => {
+const UniversitiesDetailed = ({
+  route,
+  navigation,
+}: UniversitiesDetailedProps): JSX.Element => {
   const {
     university,
     isScrollingDown,

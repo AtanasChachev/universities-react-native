@@ -1,13 +1,13 @@
 import { ImageSourcePropType } from 'react-native';
 
-export type UniversitiesState = {
-  current: University | null;
-  universities: University[];
+export interface UniversitiesState {
   favoriteUniversities: University[];
   favoriteUniversitiesLength: number;
-};
+  updateFavoriteUniversity: (university: University) => void;
+  updateFavoriteUniversities: (favoriteUniversities: University[]) => void;
+}
 
-export type University = {
+export interface University {
   'state-province'?: string;
   image?: ImageSourcePropType;
   likes?: number;
@@ -17,24 +17,4 @@ export type University = {
   country: string;
   name: string;
   domains: string[];
-};
-
-export interface UpdateUniversitiesActionReturn {
-  type: Symbol;
-  payload: University[];
-}
-export interface UpdateCurrentUniversityActionReturn {
-  type: Symbol;
-  payload: University;
-}
-export interface UpdateFavoriteUniversitiesActionReturn {
-  type: Symbol;
-  payload: University[];
-}
-export interface UpdateFavoriteUniversityActionReturn {
-  type: Symbol;
-  payload: {
-    actionCallback: string;
-    university: University;
-  };
 }
