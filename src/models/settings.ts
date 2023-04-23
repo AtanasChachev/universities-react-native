@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from 'react-native';
 
-export type Settings = {
+export interface Settings {
   tabBar: {
     icons: {
       fontSize: number;
@@ -20,10 +20,10 @@ export type Settings = {
   };
   countries: Country[];
   universityImages: ImageSourcePropType[];
-};
+}
 
-export type Country = {
+export interface Country {
   id: string;
   name: string;
   image: ImageSourcePropType;
-};
+}
