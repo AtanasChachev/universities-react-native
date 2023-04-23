@@ -61,3 +61,4 @@ buck-out/
 
 # Editor
 .vscode
+.env
